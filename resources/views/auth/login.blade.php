@@ -6,6 +6,9 @@
 
 <form   action="{{route('user.login')}}" method="POST">
     @csrf
+    <div class="image-container">
+        <img src="{{asset('/logo/asi.png')}}" alt="Logo">
+    </div>
     <div class="form-group">
         Soy Cliente
         <input type="checkbox" name="is_customer">

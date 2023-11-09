@@ -20,7 +20,22 @@
         .form-container{
             width: 400px;
         }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 25vh; /* Esto asegura que el contenedor ocupe el 100% del alto de la ventana */
+        }
+
+        /* Estilos para la imagen */
+        .image-container img {
+            width: 200px;
+            /* Puedes ajustar el ancho de la imagen según tus necesidades */
+        }
     </style>
+
+
 </head>
 
 <body>
