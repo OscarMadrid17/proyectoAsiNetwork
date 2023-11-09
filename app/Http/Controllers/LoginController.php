@@ -33,6 +33,7 @@ class LoginController extends Controller
         if ($request->is_customer) {
             $response = Http::post('http://10.200.248.122/api/v1/auth/login', $credentials);
 
+
             return $response;
             // if ($response->ok()) {
             //     return redirect(route('home'))->with([ 'token', $response['token'] ]);
