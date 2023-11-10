@@ -31,7 +31,7 @@
         /* Estilos para la imagen */
         .image-container img {
             width: 200px;
-            /* Puedes ajustar el ancho de la imagen según tus necesidades */
+            /* Ajustar el ancho de la imagen */
         }
     </style>
 
@@ -39,9 +39,9 @@
 </head>
 
 <body>
-    @if (!$errors->isEmpty())
+    {{-- @if (!$errors->isEmpty())
         {{ var_dump($errors) }}
-    @endif
+    @endif --}}
 
     <main class="form-container">
         @yield('content')

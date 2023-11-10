@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
+use Illuminate\Support\Facades\Http;
 
 class LoginRequest extends FormRequest
 {
@@ -36,14 +38,15 @@ class LoginRequest extends FormRequest
                 'email'=>$name,
                 'password'=>$this->get('password')
             ];
-        } else {
+        }
+        else {
             return [
                 'customer_code' => $name,
                 'password' => $this->get('password')
             ];
         }
 
-        //return $this->only('name','password');
+
     }
 
     public function isEmail($value){
@@ -51,4 +54,5 @@ class LoginRequest extends FormRequest
 
         return !$factory->make(['name'=>$value],['name'=>'email'])->fails();
     }
+
 }

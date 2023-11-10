@@ -22,18 +22,16 @@ Route::redirect('/', '/home');
 
 // RUTAS DE AUTH Y GUEST
 Route::middleware(['guest'])->group((function () {
-    Route::get('/login', [ LoginController::class,           'show'])->name('login');
-    Route::post('/login'        ,   [LoginController::class     ,           'login'])->name('user.login');
+    Route::get('/login' ,           [LoginController::class     ,           'show'])->name('login');
+    Route::post('/login',           [LoginController::class     ,           'login'])->name('user.login');
 
-    Route::get('/register'      ,   [RegisterController::class  ,           'show'])->name('show');
-    Route::post('/register'     ,   [RegisterController::class  ,           'register'])->name('user.register');
 }));
 
 // RUTAS DE EMPLEADOS
 Route::middleware(['auth'])->group(function() {
-    Route::post('/logout', [ LoginController::class, 'logout'])->name('logout');
+    Route::post('/logout'   , [LoginController::class   ,  'logout'])->name('logout');
 
-    Route::get('/home', [ HomeController::class, 'index'])->name('home');
+    Route::get('/home'      , [HomeController::class    ,   'index'])->name('home');
 });
 
 // RUTAS DE CLIENTES
