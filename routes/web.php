@@ -1,10 +1,7 @@
 <?php
 
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\RegisterController;
-use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,29 +14,34 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-Route::redirect('/', '/home');
-
+// ALWAYS REDIRECT TO HOME
+Route::redirect('/', '/admin/home');
 
 // RUTAS DE AUTH Y GUEST
 Route::middleware(['guest'])->group((function () {
-    Route::get('/login' ,           [LoginController::class     ,           'show'])->name('login');
-    Route::post('/login',           [LoginController::class     ,           'login'])->name('user.login');
-
+    Route::view('/login', 'pages.login')->name('login');
+    Route::post('/login', [ AuthController::class, 'login'])->name('api.login');
 }));
 
-// RUTAS DE EMPLEADOS
-Route::middleware(['auth'])->group(function() {
-    Route::post('/logout'   , [LoginController::class   ,  'logout'])->name('logout');
+// EMPLOYEES ROUTES
 
-    Route::get('/home'      , [HomeController::class    ,   'index'])->name('home');
+Route::middleware(['auth'])->group(function() {
+    Route::prefix('admin')->group(function() {
+        Route::view('/home',                'pages.employees.home')->name('home');
+        Route::view('/tickets',             'pages.employees.tickets')->name('admin.tickets');
+        Route::view('/employees',           'pages.employees.employees')->name('admin.employees');
+
+        Route::post('/logout',              [ AuthController::class, 'admin_logout'])->name('admin.logout');
+    });
 });
 
-// RUTAS DE CLIENTES
-Route::get('/mis-tickets', [ HomeController::class, 'index'])->name('home');
+// CUSTOMERS ROUTES
+// Welcome Route is public since here is where JS checks if backend sends a Customer JWT and stores it at browsers localstorage
+Route::view('/welcome',                     'pages.customers.welcome')->name('welcome');
 
-Route::middleware(['customer_auth'])->group(function() {
-    // CREAT TICKET
-    // LISTAR MIS TICKETS
-    // VER Y CREAR COMENTARIOS
+Route::middleware(['customers_auth'])->group(function() {
+    Route::view('/tickets',                 'pages.customers.tickets')->name('tickets');
+
+    Route::post('/logout',                  [ AuthController::class, 'logout'])->name('logout');
 });
 
