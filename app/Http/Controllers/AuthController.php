@@ -50,6 +50,8 @@ class AuthController extends Controller
                 return back()->withErrors([ 'login_error' => 'Claves de acceso incorrectas.' ])->onlyInput('email');
             }
 
+            // STORE TOKEN AT DB
+
             return redirect(route('welcome'))->with(['access_token' => $request_result['access_token']]);
         }
 

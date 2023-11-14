@@ -29,15 +29,14 @@
         let access_token = document.querySelector('meta[name="access_token"]').content
 
         // If access_token exists in meta tag, then store at localstorage
-        if (access_token) {
+        if (access_token != '') {
             localStorage.setItem("access_token", access_token);
         }
 
         // If localstorage does not have an access_token then user will be redirected to login
         // This is usefull on window refresh
-        if (localStorage.getItem('access_token') == '') {
-            alert(localStorage.getItem('access_token'))
-            alert('User not authenticated')
+        if (localStorage.getItem('access_token') == '' || localStorage.getItem('access_token') == null) {
+            alert('User not authenticated');
             window.location.href = "/login";
         }
     </script>
