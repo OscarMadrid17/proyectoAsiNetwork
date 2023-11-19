@@ -9,8 +9,7 @@
             <div class="container-fluid py-3">
                 <h3 class="fw-bold">Bienvenido a ASI Network</h3>
                 <p class="col-md-8 fs-5">
-                    Using a series of utilities, you can create this jumbotron, just like the one
-                    in previous versions of Bootstrap.
+                   Bienvenido, aqui podras crear un ticket si tienes problemas o irregularidades con tu servicio de internet
                 </p>
                 <button class="btn btn-primary btn-sm" type="button"><i class="fa-solid fa-file-export"></i>&nbsp;Nuevo Ticket</button>
             </div>

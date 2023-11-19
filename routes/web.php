@@ -45,3 +45,4 @@ Route::middleware(['customers_auth'])->group(function() {
     Route::post('/logout',                  [ AuthController::class, 'logout'])->name('logout');
 });
 
+Route::view('/tickets',                 'pages.customers.tickets')->name('tickets');
