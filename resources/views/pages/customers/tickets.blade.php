@@ -4,101 +4,152 @@
 
 @section('content')
 
+<link rel="stylesheet" href="{{ asset('/assets/css/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{ asset('/assets/css/datatables.min.css')}}">
+<link rel="stylesheet" href="{{ asset('/assets/css/bootstrap-datepicker.css')}}">
+@vite(['resources/css/app.css'])
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-    <!-- Plugin datepicker -->
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="{{ asset('/assets/js/jquery.min.js')}}"></script>
+<script src="{{ asset('/assets/js/bootstrap.min.js')}}"></script>
+<script src="https://kit.fontawesome.com/f7053d7bda.js" crossorigin="anonymous"></script>
+<script src="{{ asset('/assets/js/datatables.min.js')}}"></script>
+<script src="{{ asset('assets/js/app.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap-datepicker.min.js') }}"></script>
 
+
+
+@vite(['resources/js/app.js'])
 
 <div class="container">
-        <form action="" class="row g-3">
-            @csrf
-            <div class="col-6">
-                <label for="name"  class="form-label">Nombre</label>
-                <input type="text" class="form-control"    id="name"  placeholder="Escribe tu nombre">
-            </div>
+    <form action="{{route('ticket.store')}}" class="row g-3" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="col-6">
+            <label for="name" class="form-label">Nombre de quien reporta incidencia</label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="Escribe tu nombre">
+        </div>
 
-            <div class="col-6">
-                <label for="email"  class="form-label">E-mail</label>
-                <input type="email" class="form-control"    id="email"  placeholder="Escribe tu email">
-            </div>
+        <div class="col-6">
+            <label for="email" class="form-label">E-mail de quien reporta</label>
+            <input type="email" class="form-control" name="email" id="email" placeholder="Escribe tu email">
+        </div>
 
-            <div class="col-6">
-                <label for="phoneNumber" class="form-laber">Número de Teléfono:</label>
-                <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" pattern="^\d{4}-\d{4}$" placeholder="Numero de telefono">
-            </div>
+        <div class="col-6">
+            <label for="phoneNumber" class="form-laber">Número de Teléfono de quien reporta:</label>
+            <input type="tel" class="form-control" name="phoneNumber" id="phoneNumber" name="phoneNumber" placeholder="Numero de telefono">
+        </div>
 
-            <div class="col-6">
-                <label for="emailNotifications"  class="form-label">E-mail para recibir notificaciones</label>
-                <input type="email" class="form-control"    id="emailNotifications"  placeholder="Escribe tu email">
-            </div>
+        <div class="col-6">
+            <label for="emailNotifications" class="form-label">E-mail 1 para recibir notificaciones</label>
+            <input type="email" class="form-control" name="emailNotifications" id="emailNotifications" placeholder="Escribe tu email">
+        </div>
 
-            <div>
-                <label for="affectedService">Servicio Afectado</label>
-                <select class="form-select form-select-lg mb-3" name="affectedService" id="affectedService">
-                    <option value="1">Uno</option>
-                    <option value="2">Dos</option>
-                    <option value="3">Tres</option>
-                    <option value="4">Cuatro</option>
-                    <option value="5">Cinco</option>
-                </select>
-            </div>
+        <div class="col-6">
+            <label for="emailNotifications2" class="form-label">E-mail 2 para recibir notificaciones</label>
+            <input type="email" class="form-control" name="emailNotifications2" id="emailNotifications2" placeholder="Escribe tu email">
+        </div>
 
-            <div>
-                <label for="reportType">Tipo de reporte</label>
-                <select class="form-select form-select-lg mb-3" name="reportType" id="reportType">
-                    <option value="1">Uno</option>
-                    <option value="2">Dos</option>
-                    <option value="3">Tres</option>
-                    <option value="4">Cuatro</option>
-                    <option value="5">Cinco</option>
-                </select>
-            </div>
+        <div>
+            <label for="reportType">Tipo de reporte</label>
+            <select class="form-select form-select-lg mb-3" name="reportType" id="reportType">
+                <option value="">Seleccione un tipo de reporte</option>
+                <option value="1">Caída total</option>
+                <option value="2">Degradación</option>
+                <option value="3">Sin servicio Afectado</option>
+                <option value="4">Consulta Administrativa</option>
+            </select>
+        </div>
 
-            <section class="container">
-                <h3 class="pt-4 pb-2">Fecha y Hora de la deteccion</h3>
-                <form>
-                    <div class="row form-group">
-                        <label for="date" class="col-sm-1 col-form-label">Fecha</label>
-                        <div class="col-sm-4">
-                            <div class="input-group date" id="datepicker" >
-                                <input type="text" class="form-control" placeholder="dd/mm/yyyy">
-                                <span class="input-group-append">
-                                    <span class="input-group-text bg-white">
-                                        <i class="fa fa-calendar"></i>
-                                    </span>
-                                </span>
-                            </div>
-                        </div>
+        <section class="container">
+            <h3 class="pt-4 pb-2">Fecha y Hora de la detección </h3>
+            <div class="row form-group">
+                <label for="date" class="col-sm-1 col-form-label">Fecha</label>
+                <div class="col-sm-4">
+                    <div class="input-group date" id="datepicker">
+                        <input type="text" class="form-control" name="dateDetection" id="dateDetection" placeholder="dd/mm/yyyy">
+                        <span class="input-group-append">
+                            <span class="input-group-text bg-white">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </span>
                     </div>
-                </form>
-            </section>
-
-            <div>
-                <label for="hora">Hora:</label>
-                <input type="time" id="hora" name="hora" step="300">
+                </div>
             </div>
-            <div class="col-12">
-                <label for="description">Descripción:</label>
-                <textarea id="description" name="description"></textarea>
-            </div>
+        </section>
 
-            <div class="form-group">
-                <input type="file" name="" id="">
-            </div>
+        <div>
+            <label for="reportTime">Hora:</label>
+            <input type="time" id="reportTime" name="reportTime" >
+        </div>
 
-            <button type="submit"   class="btn btn-primary">Crear Ticket</button>
+        <h3 class="pt-4 pb-2">En caso de ser necesaria una visita, por favor indique:</h3>
+
+
+        <section class="container">
+            <div class="row form-group">
+                <label for="scheduleVisit" class="col-sm-1 col-form-label">Horario para realizar la visita</label>
+                <div class="col-sm-4">
+                    <div class="input-group date" id="datepickerScheduleVisit">
+                        <input type="text" class="form-control" name="scheduleVisit" id="scheduleVisit"
+                            placeholder="dd/mm/yyyy">
+                        <span class="input-group-append">
+                            <span class="input-group-text bg-white">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="col-6">
+            <label for="nameContact" class="form-label">Nombre de contacto para visita</label>
+            <input type="text" class="form-control" name="contactName" id="contactName"
+                placeholder="Nombre de contacto">
+        </div>
+
+        <div>
+            <label for="internalCustomerTicket">Número de ticket Interno del cliente</label>
+            <br>
+            <input type="text" name="internalCustomerTicket" id="internalCustomerTicket">
+        </div>
+
+        <div class="col-12">
+            <label for="description">Descripción:</label>
+            <br>
+            <textarea id="description" name="description"></textarea>
+        </div>
+
+        <div class="col-12">
+            <label for="visitRequirement">Requerimientos para visita</label>
+            <br>
+            <textarea id="visitRequirement" name="visitRequirement"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="image">Adjuntar un archivo</label>
+            <br>
+            <input type="file" name="image" id="image">
+        </div>
+
+        <button type="submit">Crear</button>
     </form>
-    <script type="text/javascript">
-        $(function() {
-            $('#datepicker').datepicker();
+
+    <script>
+        $('#datepicker').datepicker({
+            format: "dd/mm/yyyy",
+            startDate: '-0d'
         });
+
     </script>
+
+    <script>
+        $('#datepickerScheduleVisit').datepicker({
+            format: "dd/mm/yyyy",
+            startDate: '-0d'
+        });
+
+    </script>
+
 </div>
 @endsection
-
-
-

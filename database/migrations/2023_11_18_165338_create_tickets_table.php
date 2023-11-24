@@ -17,7 +17,16 @@ return new class extends Migration
             $table->string('email');
             $table->string('phoneNumber');
             $table->string('emailNotifications')->nullable();
-            $table->string('image');
+            $table->string('emailNotifications2')->nullable();
+            $table->unsignedTinyInteger('reportType')->nullable();
+            $table->string('dateDetection');
+            $table->time('reportTime');
+            $table->string('scheduleVisit')->nullable();
+            $table->string('contactName')->nullable();
+            $table->string('internalCustomerTicket')->nullable();
+            $table->string('description')->nullable();
+            $table->string('visitRequirement')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

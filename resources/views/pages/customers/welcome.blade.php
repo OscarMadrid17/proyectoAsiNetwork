@@ -11,7 +11,7 @@
                 <p class="col-md-8 fs-5">
                    Bienvenido, aqui podras crear un ticket si tienes problemas o irregularidades con tu servicio de internet
                 </p>
-                <button class="btn btn-primary btn-sm" type="button"><i class="fa-solid fa-file-export"></i>&nbsp;Nuevo Ticket</button>
+                <button class="btn btn-primary btn-sm" type="button" onclick="window.location.href='{{route('ticket.create')}}'"><i class="fa-solid fa-file-export"></i>&nbsp;Nuevo Ticket</button>
             </div>
         </div>
 

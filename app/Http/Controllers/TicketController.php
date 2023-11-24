@@ -10,9 +10,10 @@ class TicketController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function showCustomersTicket()
     {
-        //
+        $data['ticketData']=Ticket::paginate(10);
+        return view('pages.employees.tickets', $data);
     }
 
     /**
@@ -20,7 +21,7 @@ class TicketController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.customers.tickets');
     }
 
     /**
@@ -28,15 +29,24 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $ticketData = request()->except('_token');
+
+        //If image exist
+        if($request->hasFile('image')){
+            $ticketData['image']=$request->file('image')->store('img','public');
+        }
+
+        Ticket::insert($ticketData);
+        return response()->json($ticketData);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Ticket $ticket)
+    public function showMyTicket(Ticket $ticket)
     {
-        //
+        $data['ticketData']=Ticket::paginate(10);
+        return view('pages.customers.ownTickets', $data);
     }
 
     /**

@@ -1,6 +1,6 @@
-@extends('layouts.employees')
+@extends('layouts.customers')
 
-@section('title', 'Soporte ASI')
+@section('title', 'Mis Tickets ASI')
 
 @section('content')
 <div class="container mt-3 bg-light py-3 rounded-3">
