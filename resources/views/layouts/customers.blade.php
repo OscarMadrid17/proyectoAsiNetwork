@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="{{ asset('/assets/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{ asset('/assets/css/datatables.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('/assets/css/bootstrap-datepicker.css')}}">
     @vite(['resources/css/app.css'])
 </head>
 
@@ -20,6 +21,8 @@
     <script src="{{ asset('/assets/js/bootstrap.min.js')}}"></script>
     <script src="https://kit.fontawesome.com/f7053d7bda.js" crossorigin="anonymous"></script>
     <script src="{{ asset('/assets/js/datatables.min.js')}}"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap-datepicker.min.js') }}"></script>
 
     @vite(['resources/js/app.js'])
 
