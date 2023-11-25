@@ -6,12 +6,12 @@
 <div class="container">
     <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
         <div class="col-md-4 col-sm-10">
-            <form action="{{route('api.login')}}" method="POST" class="card card-body shadow">
+            <form action="{{route('customers.login')}}" method="POST" class="card card-body shadow">
                 @csrf
                 <img src="{{asset('/img/asi.png')}}" class="img-fluid w-50 m-auto" alt="AsiLogo">
 
                 @error('login_error')
-                    <div class="alert alert-danger my-3" role="alert">
+                    <div class="alert alert-warning my-3" role="alert">
                         <i class="fa-solid fa-circle-exclamation"></i>&nbsp;{{ $message }}
                     </div>
                 @endif
@@ -21,10 +21,10 @@
                         <span>
                             <i class="fa-solid fa-user"></i>
                         </span>
-                        Email | Código de Cliente
+                        Código de Cliente
                     </label>
-                    <input type="text" name="email_or_customer_code" class="form-control" value="{{old('email_or_customer_code')}}" placeholder="Ingrese su Codigo o Correo Electronico">
-                    @error('email_or_customer_code')
+                    <input type="text" name="customer_code" class="form-control" value="{{old('customer_code')}}" placeholder="Ingrese su Codigo de cliente">
+                    @error('customer_code')
                         <span class="text-danger fw-light"><i class="fa-solid fa-circle-exclamation"></i>&nbsp;{{ $message }}</span>
                     @enderror
                 </div>
@@ -42,9 +42,11 @@
                     @enderror
                 </div>
 
+                <a class="d-block text-center" href="{{ route('admin.view.login') }}">Login Admin</a>
+
                 <div class="d-grid gap-2 mt-4">
                     <button class="btn btn-primary" type="submit">INGRESAR</button>
-                  </div>
+                </div>
             </form>
         </div>
     </div>

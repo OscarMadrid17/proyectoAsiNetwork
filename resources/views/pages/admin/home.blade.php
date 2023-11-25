@@ -1,4 +1,4 @@
-@extends('layouts.employees')
+@extends('layouts.admin')
 
 @section('title', 'Soporte ASI')
 

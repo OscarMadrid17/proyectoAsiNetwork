@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="{{ route('welcome') }}">
+        <a class="navbar-brand" href="#">
             <img src="{{ asset('/img/asi_no_slogan.png') }}" class="img-fluid" style="max-height: 30px;" alt="ASI LOGO">
         </a>
 
@@ -12,7 +12,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <button class="nav-link" onclick="logout()">
+                    <button class="nav-link" onclick="document.getElementById('form-logout').submit();">
                         <i class="fa-solid fa-right-from-bracket"></i>&nbsp;Cerrar Sesion
                     </button>
                 </li>
@@ -21,25 +21,6 @@
     </div>
 </nav>
 
-
-<form id="form-logout" method="POST" action="{{ route('logout') }}">
+<form id="form-logout" method="POST" action="{{ route('customers.logout') }}">
     @csrf
-
-    {{-- <input type="hidden" name="access_token" value="{{  }}"> --}}
 </form>
-
-
-<script>
-    function logout() {
-        // Append access token from localStorage to form-logout
-        const el = document.createElement("input");
-        el.name = "access_token";
-        el.type = 'hidden';
-        el.value = localStorage.getItem('access_token');
-
-        const form = document.getElementById("form-logout");
-        form.appendChild(el);
-        localStorage.removeItem('access_token')
-        form.submit();
-    }
-</script>

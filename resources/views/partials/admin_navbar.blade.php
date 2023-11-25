@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="{{ route('home') }}">
+        <a class="navbar-brand" href="{{ route('admin.home') }}">
             <img src="{{ asset('/img/asi_no_slogan.png') }}" class="img-fluid" style="max-height: 30px;" alt="ASI LOGO">
         </a>
 

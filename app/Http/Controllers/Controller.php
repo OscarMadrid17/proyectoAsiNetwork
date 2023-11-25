@@ -11,14 +11,22 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    public function sendHttpRequest($endpoint, $requestType = 'GET', $params = [])
+    public function sendHttpRequest($endpoint, $access_token = "", $requestType = 'GET', $params = [])
     {
         try {
             // Choose the appropriate HTTP method based on $requestType
             $httpMethod = strtoupper($requestType);
+            $headers = $headers = [
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+            ];
+
+            if ($access_token != "") {
+                $headers['Authorization'] = 'Bearer ' . $access_token;
+            }
 
             // Make the HTTP request
-            $response = Http::$httpMethod($endpoint, $params);
+            $response = Http::withHeaders($headers)->$httpMethod($endpoint, $params);
 
             // Get and return the response body as an array
             return $response->json();

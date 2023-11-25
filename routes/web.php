@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\AdminAuthController;
+use App\Http\Controllers\Auth\CustomersAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,33 +16,44 @@ use App\Http\Controllers\AuthController;
 */
 
 // ALWAYS REDIRECT TO HOME
-Route::redirect('/', '/admin/home');
+Route::redirect('/', '/welcome');
 
-// RUTAS DE AUTH Y GUEST
-Route::middleware(['guest'])->group((function () {
-    Route::view('/login', 'pages.login')->name('login');
-    Route::post('/login', [ AuthController::class, 'login'])->name('api.login');
+/**
+ * --------------------------------------------------------------------------------------------------------
+ * CUSTOMERS ROUTES
+ * --------------------------------------------------------------------------------------------------------
+*/
+
+Route::middleware(['customers_guest'])->group((function () {
+    Route::view('/login',               'pages.auth.customers_login')->name('customers.view.login');
+    Route::post('/login',               [ CustomersAuthController::class, 'login'])->name('customers.login');
 }));
 
-// EMPLOYEES ROUTES
+Route::middleware(['customers_auth'])->group((function () {
+    Route::view('/welcome',         'pages.customers.welcome')->name('customers.welcome');
+    Route::post('/logout',          [ CustomersAuthController::class, 'logout'])->name('customers.logout');
+}));
 
-Route::middleware(['auth'])->group(function() {
-    Route::prefix('admin')->group(function() {
-        Route::view('/home',                'pages.employees.home')->name('home');
-        Route::view('/tickets',             'pages.employees.tickets')->name('admin.tickets');
-        Route::view('/employees',           'pages.employees.employees')->name('admin.employees');
 
-        Route::post('/logout',              [ AuthController::class, 'admin_logout'])->name('admin.logout');
-    });
+
+/**
+ * --------------------------------------------------------------------------------------------------------
+ * ADMIN ROUTES
+ * --------------------------------------------------------------------------------------------------------
+*/
+
+Route::prefix('admin')->group(function() {
+    Route::middleware(['guest'])->group((function () {
+        Route::view('/login',       'pages.auth.admin_login')->name('admin.view.login');
+        Route::post('/login',       [ AdminAuthController::class, 'login'])->name('admin.login');
+    }));
+
+    Route::middleware(['auth'])->group((function () {
+        Route::view('/home',        'pages.admin.home')->name('admin.home');
+        Route::view('/employees',   'pages.admin.employees')->name('admin.employees');
+        Route::view('/tickets',     'pages.admin.tickets')->name('admin.tickets');
+
+        Route::post('/logout',      [ AdminAuthController::class, 'logout'])->name('admin.logout');
+    }));
+
 });
-
-// CUSTOMERS ROUTES
-// Welcome Route is public since here is where JS checks if backend sends a Customer JWT and stores it at browsers localstorage
-Route::view('/welcome',                     'pages.customers.welcome')->name('welcome');
-
-Route::middleware(['customers_auth'])->group(function() {
-    Route::view('/tickets',                 'pages.customers.tickets')->name('tickets');
-
-    Route::post('/logout',                  [ AuthController::class, 'logout'])->name('logout');
-});
-

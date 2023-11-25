@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    @include('partials.employees_navbar')
+    @include('partials.admin_navbar')
 
     @yield('content')
 

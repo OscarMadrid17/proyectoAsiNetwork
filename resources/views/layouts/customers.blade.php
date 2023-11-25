@@ -22,23 +22,5 @@
     <script src="{{ asset('/assets/js/datatables.min.js')}}"></script>
 
     @vite(['resources/js/app.js'])
-
-    {{-- CUSTOMERS AUTH --}}
-    <script >
-        // Read access_token from meta tag
-        let access_token = document.querySelector('meta[name="access_token"]').content
-
-        // If access_token exists in meta tag, then store at localstorage
-        if (access_token != '') {
-            localStorage.setItem("access_token", access_token);
-        }
-
-        // If localstorage does not have an access_token then user will be redirected to login
-        // This is usefull on window refresh
-        if (localStorage.getItem('access_token') == '' || localStorage.getItem('access_token') == null) {
-            alert('User not authenticated');
-            window.location.href = "/login";
-        }
-    </script>
 </body>
 </html>
