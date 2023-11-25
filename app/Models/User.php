@@ -62,4 +62,8 @@ class User extends Authenticatable
             set: fn($value) => strtolower($value)   //Mutator
         );
     }
+
+    public function tickets() {
+        return $this->hasMany('App\Models\Ticket', 'user_id')->orderBy('created_at', 'DESC');
+    }
 }

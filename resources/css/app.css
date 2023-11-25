@@ -61,3 +61,13 @@
         overflow: scroll !important;
     }
 }
+
+
+.service-checkbox {
+    display: none; /* Hide the checkboxes */
+  }
+
+  .list-group {
+    max-height: 200px; /* Set a maximum height for the card body, making it scrollable */
+    overflow-y: auto; /* Enable vertical scrolling */
+  }

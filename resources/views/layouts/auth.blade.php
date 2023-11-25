@@ -10,7 +10,7 @@
     @vite(['resources/css/app.css'])
 </head>
 
-<body>
+<body style="padding: 0px; margin: 0px; background-color: #eef1f6;">
     @yield('content')
 
     <script src="{{ asset('/assets/js/jquery.min.js')}}"></script>

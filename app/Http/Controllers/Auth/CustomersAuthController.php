@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use Session;
 use App\AppConstants;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Http;
@@ -32,6 +33,10 @@ class CustomersAuthController extends Controller
         if (!empty($request_result['error'])) {
             return back()->withErrors([ 'login_error' => 'Claves de acceso incorrectas.' ])->onlyInput('email');
         }
+
+        Customer::create([
+            'access_token' => $request_result['access_token']
+        ]);
 
         return redirect(route('customers.welcome'))->withCookie(
             'access_token',

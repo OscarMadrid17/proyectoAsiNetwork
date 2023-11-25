@@ -1,8 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\Auth\CustomersAuthController;
+
+use App\Http\Controllers\Tickets\AdminTicketsController;
+use App\Http\Controllers\Tickets\CustomersTicketsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +35,9 @@ Route::middleware(['customers_guest'])->group((function () {
 
 Route::middleware(['customers_auth'])->group((function () {
     Route::view('/welcome',         'pages.customers.welcome')->name('customers.welcome');
+    Route::get('/tickets',          [ CustomersTicketsController::class, 'tickets'])->name('customers.tickets');
+    Route::get('/tickets/create',   [ CustomersTicketsController::class, 'tickets_create'])->name('customers.tickets.create');
+
     Route::post('/logout',          [ CustomersAuthController::class, 'logout'])->name('customers.logout');
 }));
 
@@ -51,7 +58,7 @@ Route::prefix('admin')->group(function() {
     Route::middleware(['auth'])->group((function () {
         Route::view('/home',        'pages.admin.home')->name('admin.home');
         Route::view('/employees',   'pages.admin.employees')->name('admin.employees');
-        Route::view('/tickets',     'pages.admin.tickets')->name('admin.tickets');
+        // Route::view('/tickets',     'pages.admin.tickets')->name('admin.tickets');
 
         Route::post('/logout',      [ AdminAuthController::class, 'logout'])->name('admin.logout');
     }));
