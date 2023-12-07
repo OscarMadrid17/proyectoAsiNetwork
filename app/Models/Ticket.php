@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\AppConstants;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,24 +26,29 @@ class Ticket extends Model
         'first_contact_email',
         'second_contact_email',
 
-        'affected_services',
+        'affected_service_id',
+        'affected_service_name',
+
         'report_type',
-        'detection_datetime',
+        'detection_date',
+        'detection_time',
         'visit_schedule_datetime',
         'internal_customer_ticket',
         'description',
         'visit_requirement',
-        'file'
+        'file',
+        'status',
+        'user_id',
+        'customer_id'
     ];
 
-    /**
-     * The attributes thatshould be cast.
-     *
-     * @var array<string, string>
-    */
-    protected $casts = [
-        'affected_services' => 'array',
+    protected $appends = [
+        'reportTypeText'
     ];
+
+    public function getReportTypeTextAttribute() {
+        return AppConstants::REPORT_TYPES[$this->report_type];
+    }
 
     public function customer() {
         return $this->belongsTo('App\Models\Customer', 'customer_id');

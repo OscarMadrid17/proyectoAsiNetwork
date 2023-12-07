@@ -26,7 +26,7 @@
                         </label>
                         <input type="text" name="email" class="form-control" value="{{old('email')}}" placeholder="Ingrese su Correo Electronico">
                         @error('email')
-                            <span class="text-danger fw-light"><i class="fa-solid fa-circle-exclamation"></i>&nbsp;{{ $message }}</span>
+                            <small class="text-danger fw-light"><i class="fa-solid fa-circle-exclamation"></i>&nbsp;{{ $message }}</small>
                         @enderror
                     </div>
 
@@ -39,7 +39,7 @@
                         </label>
                         <input type="password" name="password" class="form-control" value="{{old('password')}}" placeholder="**********">
                         @error('password')
-                            <span class="text-danger fw-light"><i class="fa-solid fa-circle-exclamation"></i>&nbsp;{{ $message }}</span>
+                            <small class="text-danger fw-light"><i class="fa-solid fa-circle-exclamation"></i>&nbsp;{{ $message }}</small>
                         @enderror
                     </div>
 

@@ -17,7 +17,8 @@ class Customer extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'access_token'
+        'access_token',
+        'customer_code'
     ];
 
     public function tickets() {

@@ -21,5 +21,9 @@
     <script src="{{ asset('/assets/js/datatables.min.js')}}"></script>
 
     @vite(['resources/js/app.js'])
+
+    <script>
+        new DataTable('#example');
+    </script>
 </body>
 </html>

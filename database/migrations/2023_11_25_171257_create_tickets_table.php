@@ -18,22 +18,25 @@ return new class extends Migration
             $table->string('name', 255);
             $table->string('email', 255);
             $table->string('phone_number', 25);
-            $table->json('affected_services');
 
             // Self Store In App Constants
             $table->unsignedTinyInteger('report_type');
 
             // Defined by customer
+            $table->string('affected_service_id', 255);
+            $table->string('affected_service_name', 255);
             $table->string('contact_name', 255)->nullable();
             $table->string('first_contact_email', 255)->nullable();
             $table->string('second_contact_email', 255)->nullable();
-            $table->dateTime('detection_datetime');
-            $table->dateTime('visit_schedule_datetime');
+            $table->date('detection_date');
+            $table->time('detection_time');
+            $table->date('visit_schedule_datetime')->nullable();
             $table->string('internal_customer_ticket', 100)->nullable();
             $table->longText('description', 10000)->nullable();
             $table->longText('visit_requirement', 10000)->nullable();
             $table->string('file', 250)->nullable();
-            $table->unsignedBigInteger('customer_id');
+            $table->unsignedTinyInteger('status')->default(0);
+            $table->unsignedBigInteger('customer_id')->nullable(); //nulo(insertando datos de prueba)
             $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
         });

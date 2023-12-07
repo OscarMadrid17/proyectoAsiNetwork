@@ -34,4 +34,20 @@ class AppConstants {
         'Consulta Administrativa'
     ];
 
+    const TICKET_STATUSES = [
+        'ABIERTO',
+        'En Proceso',
+        'Cerrado'
+    ];
+
+    /**
+     * ------------------------------------------------------------------------------------------------
+     * MIME TYPES
+     * ------------------------------------------------------------------------------------------------
+     */
+    const MIME_TYPES = [
+        'jpg'   => 'image/jpeg',
+        'jpeg'  => 'image/jpeg',
+        'png'   => 'image/png',
+    ];
 }

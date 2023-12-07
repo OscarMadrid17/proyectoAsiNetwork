@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->longText('access_token');
+            $table->string('customer_code');
             $table->timestamps();
         });
     }

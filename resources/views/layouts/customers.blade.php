@@ -8,6 +8,11 @@
 
     <link rel="stylesheet" href="{{ asset('/assets/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{ asset('/assets/css/datatables.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('/assets/css/bootstrap-datepicker.css')}}">
+
+    <script src="{{ asset('/assets/js/jquery.min.js')}}"></script>
+    <script src="{{ asset('/assets/js/bootstrap-datepicker.min.js')}}"></script>
+
     @vite(['resources/css/app.css'])
 </head>
 
@@ -15,12 +20,14 @@
     @include('partials.customers_navbar')
 
     @yield('content')
-
-    <script src="{{ asset('/assets/js/jquery.min.js')}}"></script>
     <script src="{{ asset('/assets/js/bootstrap.min.js')}}"></script>
     <script src="https://kit.fontawesome.com/f7053d7bda.js" crossorigin="anonymous"></script>
     <script src="{{ asset('/assets/js/datatables.min.js')}}"></script>
 
     @vite(['resources/js/app.js'])
+
+    <script>
+        new DataTable('#example');
+    </script>
 </body>
 </html>

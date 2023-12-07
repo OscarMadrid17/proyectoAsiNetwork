@@ -25,7 +25,7 @@
                     </label>
                     <input type="text" name="customer_code" class="form-control" value="{{old('customer_code')}}" placeholder="Ingrese su Codigo de cliente">
                     @error('customer_code')
-                        <span class="text-danger fw-light"><i class="fa-solid fa-circle-exclamation"></i>&nbsp;{{ $message }}</span>
+                        <small class="text-danger fw-light"><i class="fa-solid fa-circle-exclamation"></i>&nbsp;{{ $message }}</small>
                     @enderror
                 </div>
 
@@ -38,7 +38,7 @@
                     </label>
                     <input type="password" name="password" class="form-control" value="{{old('password')}}" placeholder="**********">
                     @error('password')
-                        <span class="text-danger fw-light"><i class="fa-solid fa-circle-exclamation"></i>&nbsp;{{ $message }}</span>
+                        <small class="text-danger fw-light"><i class="fa-solid fa-circle-exclamation"></i>&nbsp;{{ $message }}</small>
                     @enderror
                 </div>
 

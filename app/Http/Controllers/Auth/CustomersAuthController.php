@@ -34,9 +34,10 @@ class CustomersAuthController extends Controller
             return back()->withErrors([ 'login_error' => 'Claves de acceso incorrectas.' ])->onlyInput('email');
         }
 
-        Customer::create([
-            'access_token' => $request_result['access_token']
-        ]);
+        Customer::updateOrCreate(
+            [ 'customer_code' => $request->customer_code ],
+            [ 'access_token'  => $request_result['access_token'] ]
+        );
 
         return redirect(route('customers.welcome'))->withCookie(
             'access_token',

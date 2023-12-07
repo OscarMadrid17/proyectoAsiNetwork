@@ -9,8 +9,7 @@
             <div class="container-fluid py-3">
                 <h3 class="fw-bold">Bienvenido a ASI Network</h3>
                 <p class="col-md-8 fs-5">
-                    Using a series of utilities, you can create this jumbotron, just like the one
-                    in previous versions of Bootstrap.
+                   Es un gusto tenerte por aqui, si crees que tienes irregularidades con alguno de tus servicios puedes reportarlo aqui
                 </p>
                 <a href="{{ route('customers.tickets.create') }}" class="btn btn-primary btn-sm" type="button"><i class="fa-solid fa-file-export"></i>&nbsp;Nuevo Ticket</a>
             </div>
