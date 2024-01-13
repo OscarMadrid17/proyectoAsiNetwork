@@ -76,4 +76,3 @@ Route::prefix('admin')->group(function() {
     }));
 });
 
-Route::view('/prueba',        'pages.admin.datepicker');

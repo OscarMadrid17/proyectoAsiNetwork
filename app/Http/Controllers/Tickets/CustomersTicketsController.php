@@ -129,7 +129,7 @@ class CustomersTicketsController extends Controller
             $ticketData['visit_schedule_datetime']      = Carbon::createFromFormat('d/m/Y', $request->input('visit_schedule_datetime'))->format('Y-m-d');
         }
 
-        $ticket = Ticket::create([
+        $ticketData = Ticket::create([
             'name'                      => $ticketData['name'],
             'email'                     => $ticketData['email'],
             'phone_number'              => $ticketData['phone_number'],
