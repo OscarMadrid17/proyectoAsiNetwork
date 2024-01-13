@@ -11,9 +11,11 @@
                 <h1 class="h3 text-dark fw-bold">
                     Empleados ASI
                 </h1>
+                @if(Auth()->user()->is_superadmin)
                 <a href="{{ route('admin.employees.create') }}" class="btn btn-sm btn-dark">
                     <i class="fa-solid fa-plus"></i>&nbsp;Registrar
                 </a>
+                @endif
             </div>
         </div>
 
@@ -107,5 +109,13 @@
         @endif
     </div>
 </div>
+
+@if(Session::has('message'))
+<div class="container text-center py-3">
+    <div class="alert alert-danger" role="alert">
+        {{ Session::get('message') }}
+    </div>
+</div>
+@endif
 
 @endsection
