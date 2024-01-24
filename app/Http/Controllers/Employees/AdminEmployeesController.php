@@ -26,23 +26,19 @@ class AdminEmployeesController extends Controller
 
         if(Auth()->user()->is_superadmin){
             $credentialsEmployee = $request->validate([
-                'name'      =>  'required|string|max:255',
-                'email'     =>  'required|email|unique:users,email|max:255',
-                'password'  =>  'required|min:6',
-                'rol'       =>  'required|in:is_superadmin,is_support'
+                'name'              =>  'required|string|max:255',
+                'email'             =>  'required|email|unique:users,email|max:255',
+                'password'          =>  'required|min:6',
+                'is_superadmin'     =>  'required|in:yes,no'
             ]);
-
-            // Assign Boolean values based on role
-            $isSuperadmin   = $credentialsEmployee['rol'] === 'is_superadmin';
-            $isSupport      = $credentialsEmployee['rol'] === 'is_support';
 
             $credentialsEmployee = User::create([
                 'name'          =>$credentialsEmployee['name'],
                 'email'         =>$credentialsEmployee['email'],
                 'password'      =>$credentialsEmployee['password'],
-                'is_superadmin' =>$isSuperadmin,
-                'is_support'    =>$isSupport,
+                'is_superadmin' =>$credentialsEmployee['is_superadmin'] == 'yes' ? 1 : 0,
             ]);
+
             return redirect()->route('admin.home')->with('message','usuario creado exitosamente');
         }
         else{

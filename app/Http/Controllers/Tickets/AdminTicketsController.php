@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Tickets;
 use App\AppConstants;
 use App\Models\Ticket;
 use App\Http\Controllers\Controller;
+use App\Models\TicketComment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,7 +20,9 @@ class AdminTicketsController extends Controller
     }
 
     public function tickets_preview(Request $request, $id) {
-        $ticket = Ticket::where('id', $id)->firstOrFail();
+        $ticket = Ticket::where('id', $id)->with(['comments.user' => function($query) {
+            $query->orderBy('created_at', 'DESC');
+        }])->firstOrFail();
 
         return view('pages.admin.tickets_preview', [
             'ticket' => $ticket
@@ -51,5 +54,22 @@ class AdminTicketsController extends Controller
         // return response()->json([$ticket, $request->all()]);
 
         return redirect(route('admin.tickets'))->with(['ticket_status_updated' => 'El estado del ticket se actualizo exitosamente.']);
+    }
+
+    public function tickets_comment(Request $request)
+    {
+        $request->validate([
+            'ticket_id'     => 'required|string',
+            'content'       => 'required|string|max:5000'
+        ]);
+
+        TicketComment::create([
+            'created_by_customer'  => false,
+            'user_id'              => auth()->user()->id,
+            'ticket_id'            => $request->ticket_id,
+            'content'              => $request->content
+        ]);
+
+        return redirect(route('admin.tickets.preview', [ 'id' => $request->ticket_id ]));
     }
 }

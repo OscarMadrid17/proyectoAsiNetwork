@@ -42,6 +42,7 @@ Route::middleware(['customers_auth'])->group((function () {
     Route::get('/tickets/{id}',         [ CustomersTicketsController::class, 'tickets_preview'])->name('customers.tickets.preview');
     Route::get('/tickets/{id}/preview', [ CustomersTicketsController::class, 'tickets_file_preview'])->name('customers.tickets.file.preview');
     Route::post('/tickets/create',      [ CustomersTicketsController::class, 'tickets_store'])->name('customers.tickets.store');
+    Route::post('/tickets/comment',     [ CustomersTicketsController::class, 'tickets_comment'])->name('customers.tickets.comment');
 
     Route::post('/logout',              [ CustomersAuthController::class, 'logout'])->name('customers.logout');
 }));
@@ -67,6 +68,7 @@ Route::prefix('admin')->group(function() {
         Route::get('/tickets/{id}',         [ AdminTicketsController::class, 'tickets_preview'])->name('admin.tickets.preview');
         Route::get('/tickets/{id}/preview', [ AdminTicketsController::class, 'tickets_file_preview'])->name('admin.tickets.file.preview');
         Route::post('/tickets/status',      [ AdminTicketsController::class, 'tickets_status'])->name('admin.tickets.status');
+        Route::post('/tickets/comment',     [ AdminTicketsController::class, 'tickets_comment'])->name('admin.tickets.comment');
 
         Route::get('/employees',            [ AdminEmployeesController::class, 'employees'])->name('admin.employees');
         Route::get('/employees/create',     [ AdminEmployeesController::class, 'employees_create'])->name('admin.employees.create');

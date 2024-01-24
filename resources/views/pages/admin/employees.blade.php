@@ -26,10 +26,10 @@
                         <thead>
                             <tr>
                                 <th class="text-center">
-                                    <small>Name</small>
+                                    <small>Nombre</small>
                                 </th>
                                 <th class="text-center">
-                                    <small>Email</small>
+                                    <small>Correo Electronico</small>
                                 </th>
                                 <th class="text-center">
                                     <small>Super Admin</small>
@@ -84,13 +84,16 @@
                         <tfoot>
                             <tr>
                                 <th class="text-center">
-                                    <small>Name</small>
+                                    <small>Nombre</small>
                                 </th>
                                 <th class="text-center">
-                                    <small>Email</small>
+                                    <small>Correo Electronico</small>
                                 </th>
                                 <th class="text-center">
                                     <small>Super Admin</small>
+                                </th>
+                                <th class="text-center">
+                                    <small>Soporte/Ingenieria</small>
                                 </th>
                                 <th class="text-center">
                                     <small>Opciones</small>
