@@ -15,7 +15,7 @@ class CustomersTicketsController extends Controller
 {
     public function tickets(Request $request) {
         $customer = Customer::where('access_token', $request->cookie('access_token'))->firstOrFail();
-        $tickets = $customer->tickets;
+        $tickets = $customer->tickets()->orderBy('created_at', 'DESC')->get();;
 
         return view('pages.customers.tickets', [
             'tickets'       => $tickets

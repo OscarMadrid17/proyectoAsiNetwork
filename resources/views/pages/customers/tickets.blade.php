@@ -89,17 +89,17 @@
                                 </td>
                                 <td class="text-center">
                                     <span class="badge bg-success">
-                                        {{ $ticket->detection_date }}
+                                        {{ Carbon\Carbon::parse($ticket->detection_date)->format('d/m/Y') }}
                                     </span>
                                 </td>
                                 <td class="text-center">
                                     <span class="badge bg-success">
-                                        {{ $ticket->detection_time }}
+                                        {{ Carbon\Carbon::parse($ticket->detection_time)->format('H:i') }}
                                     </span>
                                 </td>
                                 <td class="text-center">
                                     <span class="badge bg-success">
-                                        {{ $ticket->created_at }}
+                                        {{ Carbon\Carbon::parse($ticket->created_at)->format('d/m/Y H:i') }}
                                     </span>
                                 </td>
 

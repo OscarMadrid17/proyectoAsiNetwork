@@ -27,7 +27,9 @@
     @vite(['resources/js/app.js'])
 
     <script>
-        new DataTable('#example');
+        new DataTable('#example', {
+            order: [] // Disable DataTables default sorting
+        });
     </script>
 </body>
 </html>

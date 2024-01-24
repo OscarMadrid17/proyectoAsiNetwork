@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 class AdminTicketsController extends Controller
 {
     public function tickets() {
-        $tickets = Ticket::with('customer')->get();
+        $tickets = Ticket::with('customer')->orderBy('created_at', 'desc')->get();
 
         return view('pages.admin.tickets', [
             'tickets' => $tickets
@@ -51,7 +51,6 @@ class AdminTicketsController extends Controller
         $ticket = Ticket::where('id', $request->ticket_id)->firstOrFail();
         $ticket->status = $request->new_status;
         $ticket->save();
-        // return response()->json([$ticket, $request->all()]);
 
         return redirect(route('admin.tickets'))->with(['ticket_status_updated' => 'El estado del ticket se actualizo exitosamente.']);
     }
