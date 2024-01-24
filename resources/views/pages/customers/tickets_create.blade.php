@@ -223,9 +223,9 @@
                 @if(!empty($customer_services))
                     @foreach ($customer_services as $service)
                         <div class="col-md-4 form-check">
-                            <input class="form-check-input" type="radio" name="affected_service" value="{{ $service['service_id'] . '||' . $service['name'] }}" id="flexCheckIndeterminate">
+                            <input class="form-check-input" type="radio" name="affected_service" value="{{ $service['service_id'] . '||' . $service['name'] }}">
 
-                            <label class="form-check-label" for="flexCheckIndeterminate">
+                            <label class="form-check-label">
                                 <p class="text-muted">
                                     {{ $service['name'] }}
                                     <small class="d-block">

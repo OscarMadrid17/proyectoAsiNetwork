@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('tickets_comments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->boolean('is_superadmin')->default(false);
-            $table->rememberToken();
+            $table->boolean('created_by_customer')->default(true);
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('ticket_id');
+            $table->string('content', 5000);
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('tickets_comments');
     }
 };

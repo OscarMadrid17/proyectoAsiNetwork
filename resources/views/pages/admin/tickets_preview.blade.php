@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    <form action="{{route('customers.tickets.store')}}" method="POST" enctype="multipart/form-data">
+    <div>
         @csrf
 
         <div class="row py-1 px-4">
@@ -106,17 +106,23 @@
         </div>
 
         <hr class="bg-light">
-    </form>
+    </div>
 </div>
 
 <div class="container mt-2 bg-light py-1 mb-3 rounded-3 shadow">
     <div class="row">
         <div class="col-md-12 p-3">
             <div class="card-body">
-                <form action="" method="POST">
+                <form action="{{ route('admin.tickets.comment') }}" method="POST">
                     @csrf
+                    <input type="hidden" name="ticket_id" value="{{ request()->route()->parameters['id'] }}">
+
                     <div class="mb-3">
-                        <textarea class="form-control" id="commentBody" name="body" rows="2" placeholder="Agregar comentario" required></textarea>
+                        <textarea class="form-control" name="content" rows="4" placeholder="Agregar comentario"></textarea>
+
+                        @error('content')
+                            <small class="text-danger fw-light"><i class="fa-solid fa-circle-exclamation"></i>&nbsp;{{ $message }}</small>
+                        @enderror
                     </div>
 
                     <div class="d-flex justify-content-end">
@@ -133,17 +139,58 @@
     <div class="row">
         <div class="col-md-12 p-1">
             <ul class="list-group mt-2">
-                @forelse (optional($ticket->comments)->reverse() ?? [] as $comment)
-                    <li class="list-group-item">
-                        <strong>{{ $comment->user->name }}</strong> - {{ $comment->created_at }}
-                        <p>{{ $comment->body }}</p>
-                    </li>
-                @empty
+                @if (!empty($ticket->comments) && count($ticket->comments))
+                    @foreach ($ticket->comments as $comment)
+
+                        @if ($comment->user_id == auth()->user()->id)
+                            <div class="rounded my-1 px-4 py-2 border" style="background: #eef1f6;">
+                                <p class="text-muted">
+                                    {{ $comment->content }}
+                                </p>
+
+                                <small class="d-block text-muted" style="font-size: 12px;">
+                                    {{ Carbon\Carbon::parse($comment->created_at)->diffForHumans() }}
+                                </small>
+
+                                <div class="d-flex justify-content-between align-items-center" style="font-size: 12px;">
+                                    <strong class="d-block text-muted">
+                                        {{ $comment->user->name }}
+                                    </strong>
+                                    <span class="d-block text-muted">
+                                        {{ $comment->user->is_superadmin ? 'Depto. Ingenieria' : 'Soporte Tecnico' }}
+                                    </span>
+                                </div>
+                            </div>
+                        @else
+                            <div class="rounded my-1 px-4 py-2 border" style="background: #eeedf2;">
+                                <p class="text-muted text-end">
+                                    {{ $comment->content }}
+                                </p>
+
+                                <small class="d-block text-muted text-end" style="font-size: 12px;">
+                                    {{ Carbon\Carbon::parse($comment->created_at)->diffForHumans() }}
+                                </small>
+
+                                @if ($comment->user != null)
+                                    <div class="d-flex justify-content-between align-items-center" style="font-size: 12px;">
+                                        <strong class="d-block text-muted">
+                                            {{ $comment->user->name }}
+                                        </strong>
+                                        <span class="d-block text-muted">
+                                            {{ $comment->user->is_superadmin ? 'Depto. Ingenieria' : 'Soporte Tecnico' }}
+                                        </span>
+                                    </div>
+                                @endif
+                            </div>
+                        @endif
+                    @endforeach
+                @else
                     <p class="text-center fw-bold text-muted">
                         <i class="fa-solid fa-circle-exclamation"></i>
                         <br>
-                        No hay comentarios aún.</p>
-                @endforelse
+                        No hay comentarios aún.
+                    </p>
+                @endif
             </ul>
         </div>
     </div>

@@ -26,19 +26,16 @@
                         <thead>
                             <tr>
                                 <th class="text-center">
-                                    <small>Name</small>
+                                    <small>Nombre</small>
                                 </th>
                                 <th class="text-center">
-                                    <small>Email</small>
+                                    <small>Correo Electronico</small>
                                 </th>
                                 <th class="text-center">
                                     <small>Super Admin</small>
                                 </th>
                                 <th class="text-center">
                                     <small>Soporte/Ingenieria</small>
-                                </th>
-                                <th class="text-center">
-                                    <small>Opciones</small>
                                 </th>
                             </tr>
                         </thead>
@@ -59,24 +56,11 @@
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        @if ($employee->is_support == 1)
+                                        @if ($employee->is_superadmin == 1)
+                                            <span class="badge bg-primary">INGENIERIA</span>
+                                        @else
                                             <span class="badge bg-dark">SOPORTE</span>
                                         @endif
-
-                                        @if ($employee->status == 0)
-                                            <span class="badge bg-primary">INGENIERIA</span>
-                                        @endif
-                                    </td>
-                                    <td class="text-center">
-                                        <div class="dropdown">
-                                            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="fa-solid fa-gears"></i>
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                {{-- LINK A EDITAR Y CREAR USUARIOS --}}
-                                            </ul>
-                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -84,16 +68,16 @@
                         <tfoot>
                             <tr>
                                 <th class="text-center">
-                                    <small>Name</small>
+                                    <small>Nombre</small>
                                 </th>
                                 <th class="text-center">
-                                    <small>Email</small>
+                                    <small>Correo Electronico</small>
                                 </th>
                                 <th class="text-center">
                                     <small>Super Admin</small>
                                 </th>
                                 <th class="text-center">
-                                    <small>Opciones</small>
+                                    <small>Soporte/Ingenieria</small>
                                 </th>
                             </tr>
                         </tfoot>

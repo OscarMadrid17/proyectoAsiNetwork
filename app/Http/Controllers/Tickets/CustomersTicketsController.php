@@ -6,6 +6,7 @@ use App\AppConstants;
 use App\Models\Ticket;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use App\Models\TicketComment;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -14,10 +15,10 @@ class CustomersTicketsController extends Controller
 {
     public function tickets(Request $request) {
         $customer = Customer::where('access_token', $request->cookie('access_token'))->firstOrFail();
-        $tickets = $customer->tickets;
+        $tickets = $customer->tickets()->orderBy('created_at', 'DESC')->get();;
 
         return view('pages.customers.tickets', [
-            'tickets' => $tickets
+            'tickets'       => $tickets
         ]);
     }
 
@@ -61,7 +62,9 @@ class CustomersTicketsController extends Controller
 
     public function tickets_preview(Request $request, $id) {
         $customer = Customer::where('access_token', $request->cookie('access_token'))->firstOrFail();
-        $ticket = $customer->tickets->where('id', $id)->firstOrFail();
+        $ticket = $customer->tickets()->where('id', $id)->with(['comments.user' => function($query) {
+            $query->orderBy('created_at', 'DESC');
+        }])->firstOrFail();
 
         return view('pages.customers.tickets_preview', [
             'ticket' => $ticket
@@ -153,5 +156,25 @@ class CustomersTicketsController extends Controller
         ]);
 
         return redirect(route('customers.tickets'))->with(['ticket_stored' => 'Ticket creado exitosamente!']);
+    }
+
+    public function tickets_comment(Request $request)
+    {
+        $request->validate([
+            'ticket_id'     => 'required|string',
+            'content'       => 'required|string|max:5000'
+        ]);
+
+        $customer = Customer::where('access_token', $request->cookie('access_token'))->firstOrFail();
+        $ticket = $customer->tickets()->where('id', $request->ticket_id)->firstOrFail();
+
+        TicketComment::create([
+            'created_by_customer'   => true,
+            'user_id'               => $customer->customer_code,
+            'ticket_id'             => $ticket->id,
+            'content'               => $request->content
+        ]);
+
+        return redirect(route('customers.tickets.preview', [ 'id' => $request->ticket_id ]));
     }
 }

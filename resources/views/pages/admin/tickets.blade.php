@@ -86,17 +86,17 @@
                                 </td>
                                 <td class="text-center">
                                     <span class="badge bg-success">
-                                        {{ $ticket->detection_date }}
+                                        {{ Carbon\Carbon::parse($ticket->detection_date)->format('d/m/Y') }}
                                     </span>
                                 </td>
                                 <td class="text-center">
                                     <span class="badge bg-success">
-                                        {{ $ticket->detection_time }}
+                                        {{ Carbon\Carbon::parse($ticket->detection_time)->format('H:i') }}
                                     </span>
                                 </td>
                                 <td class="text-center">
                                     <span class="badge bg-success">
-                                        {{ $ticket->created_at }}
+                                        {{ Carbon\Carbon::parse($ticket->created_at)->format('d/m/Y H:i') }}
                                     </span>
                                 </td>
 
@@ -110,8 +110,8 @@
                                             <li><a class="dropdown-item" href="{{ route('admin.tickets.preview', [ 'id' => $ticket->id ]) }}">Ver Detalles</a></li>
 
                                             @if ($ticket->status != 0 )
-                                                <li><a class="dropdown-item" href="#" onclick="document.getElementById('update_ticket_to_open_form').submit();">Cambiar Estado a ABIERTO</a></li>
-                                                <form method="POST" action="{{ route('admin.tickets.status') }}" id="update_ticket_to_open_form">
+                                                <li><a class="dropdown-item" href="#" onclick="document.getElementById('{{ 'update_ticket_to_open_form_' . $ticket->id }}').submit();">Cambiar Estado a ABIERTO</a></li>
+                                                <form method="POST" action="{{ route('admin.tickets.status') }}" id="{{ 'update_ticket_to_open_form_' . $ticket->id }}">
                                                     @csrf
                                                     <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
                                                     <input type="hidden" name="new_status" value="0">
@@ -119,8 +119,8 @@
                                             @endif
 
                                             @if ($ticket->status != 1 )
-                                                <li><a class="dropdown-item" href="#" onclick="document.getElementById('update_ticket_to_in_progress_form').submit();">Cambiar Estado a EN PROCESO</a></li>
-                                                <form method="POST" action="{{ route('admin.tickets.status') }}" id="update_ticket_to_in_progress_form">
+                                                <li><a class="dropdown-item" href="#" onclick="document.getElementById('{{ 'update_ticket_to_in_progress_form_' . $ticket->id }}').submit();">Cambiar Estado a EN PROCESO</a></li>
+                                                <form method="POST" action="{{ route('admin.tickets.status') }}" id="{{ 'update_ticket_to_in_progress_form_' . $ticket->id }}">
                                                     @csrf
                                                     <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
                                                     <input type="hidden" name="new_status" value="1">
@@ -128,8 +128,8 @@
                                             @endif
 
                                             @if ($ticket->status != 2 )
-                                                <li><a class="dropdown-item" href="#" onclick="document.getElementById('update_ticket_to_closed_form').submit();">Cambiar Estado a CERRADO</a></li>
-                                                <form method="POST" action="{{ route('admin.tickets.status') }}" id="update_ticket_to_closed_form">
+                                                <li><a class="dropdown-item" href="#" onclick="document.getElementById('{{ 'update_ticket_to_closed_form_' . $ticket->id }}').submit();">Cambiar Estado a CERRADO</a></li>
+                                                <form method="POST" action="{{ route('admin.tickets.status') }}" id="{{ 'update_ticket_to_closed_form_' . $ticket->id }}">
                                                     @csrf
                                                     <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
                                                     <input type="hidden" name="new_status" value="2">
