@@ -10,7 +10,7 @@
                 <h1 class="h3 text-dark fw-bold">
                     <i class="fa-solid fa-ticket"></i>&nbsp;Resumen de Ticket
                 </h1>
-                <a href="{{ route('customers.tickets') }}" class="btn btn-sm btn-outline-dark">
+                <a href="{{ route('admin.tickets') }}" class="btn btn-sm btn-outline-dark">
                     <i class="fa-solid fa-chevron-left"></i>&nbsp;Regresar
                 </a>
             </div>
@@ -78,7 +78,7 @@
                     Servicio Afectado: {{ $ticket->affected_service_name }}
                     <br>
                     @if ($ticket->file != '')
-                        <a href="{{ route('customers.tickets.file.preview', [ 'id' => $ticket->id ]) }}">
+                        <a href="{{ route('admin.tickets.file.preview', [ 'id' => $ticket->id ]) }}">
                             Ver Adjunto
                         </a>
                     @endif
