@@ -16,7 +16,7 @@
         </div>
 
         <footer class="pt-3 mt-4 text-body-secondary border-top">
-            &copy; ASI NETWORK 2023
+            &copy; ASI NETWORK 2024
         </footer>
     </div>
 </main>

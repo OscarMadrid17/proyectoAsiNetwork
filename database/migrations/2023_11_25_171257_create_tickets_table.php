@@ -36,7 +36,7 @@ return new class extends Migration
             $table->longText('visit_requirement', 10000)->nullable();
             $table->string('file', 250)->nullable();
             $table->unsignedTinyInteger('status')->default(0);
-            $table->unsignedBigInteger('customer_id')->nullable(); //nulo(insertando datos de prueba)
+            $table->unsignedBigInteger('customer_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
         });
